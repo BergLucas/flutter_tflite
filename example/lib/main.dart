@@ -40,12 +40,13 @@ class _MyAppState extends State<MyApp> {
   bool _busy = false;
 
   Future predictImagePicker() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    final ImagePicker _picker = ImagePicker();
+    var image = await _picker.pickImage(source: ImageSource.gallery);
     if (image == null) return;
     setState(() {
       _busy = true;
     });
-    predictImage(image);
+    predictImage(File(image.path));
   }
 
   Future predictImage(File image) async {
